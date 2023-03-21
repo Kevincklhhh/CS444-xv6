@@ -7,6 +7,16 @@
 #include "mmu.h"
 #include "proc.h"
 
+int sys_helloYou(void)
+{
+  char *name;
+  if (argstr(0, &name) < 0)
+    return -1;
+
+  cprintf("%s\n", name);
+  return 0;
+}
+
 int sys_hello(void)
 {
   cprintf("Hello\n");
