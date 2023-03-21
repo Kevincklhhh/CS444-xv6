@@ -7,6 +7,16 @@
 #include "mmu.h"
 #include "proc.h"
 
+int sys_getNumProc(void)
+{
+  return get_num_proc();
+}
+
+int sys_getMaxPid(void)
+{
+  return get_max_pid();
+}
+
 int sys_helloYou(void)
 {
   char *name;
