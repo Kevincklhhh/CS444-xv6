@@ -6,6 +6,7 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
+#include "processInfo.h"
 
 struct
 {
@@ -20,6 +21,26 @@ extern void forkret(void);
 extern void trapret(void);
 
 static void wakeup1(void *chan);
+
+int get_proc_info(int pid, struct processInfo *pinfo) // return a processInfo struct of a process of given PID
+{
+  struct proc *p;
+
+  acquire(&ptable.lock);
+  for (p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+  {
+    if (p->pid == pid)
+    {
+      pinfo->pid = p->pid;
+      pinfo->psize = p->sz;
+      pinfo->numberContextSwitches = p->num_context_switches;
+      release(&ptable.lock);
+      return 0;
+    }
+  }
+  release(&ptable.lock);
+  return -1;
+}
 
 int get_num_proc(void)
 {
@@ -218,7 +239,7 @@ int fork(void)
   int i, pid;
   struct proc *np;
   struct proc *curproc = myproc();
-
+  np->num_context_switches = 0;
   // Allocate process.
   if ((np = allocproc()) == 0)
   {
@@ -386,7 +407,7 @@ void scheduler(void)
       c->proc = p;
       switchuvm(p);
       p->state = RUNNING;
-
+      p->num_context_switches++;
       swtch(&(c->scheduler), p->context);
       switchkvm();
 

@@ -1,3 +1,5 @@
+#include "processInfo.h" // Add this line in user.h
+
 struct stat;
 struct rtcdate;
 
@@ -27,6 +29,7 @@ int hello(void);
 int helloYou(char *);
 int getNumProc(void);
 int getMaxPid(void);
+int getProcInfo(int, struct processInfo *);
 
 // ulib.c
 int stat(const char *, struct stat *);

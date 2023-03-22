@@ -47,6 +47,7 @@ enum procstate
 // Per-process state
 struct proc
 {
+  int num_context_switches;   // Number of context switches
   uint sz;                    // Size of process memory (bytes)
   pde_t *pgdir;               // Page table
   char *kstack;               // Bottom of kernel stack for this process
@@ -64,7 +65,7 @@ struct proc
 
 int get_num_proc(void);
 int get_max_pid(void);
-
+int get_proc_info(int pid, struct processInfo *pinfo);
 // Process memory is laid out contiguously, low addresses first:
 //   text
 //   original data and bss
