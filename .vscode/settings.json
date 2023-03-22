@@ -2,6 +2,7 @@
     "files.associations": {
         "types.h": "c",
         "user.h": "c",
-        "fcntl.h": "c"
+        "fcntl.h": "c",
+        "processinfo.h": "c"
     }
 }
