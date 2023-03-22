@@ -1,4 +1,3 @@
-#include "processInfo.h"
 // Per-CPU state
 struct cpu
 {
