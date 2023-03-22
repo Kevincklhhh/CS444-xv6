@@ -239,7 +239,7 @@ int fork(void)
   int i, pid;
   struct proc *np;
   struct proc *curproc = myproc();
-  np->num_context_switches = 0;
+
   // Allocate process.
   if ((np = allocproc()) == 0)
   {
@@ -254,6 +254,7 @@ int fork(void)
     np->state = UNUSED;
     return -1;
   }
+  np->num_context_switches = 0;
   np->sz = curproc->sz;
   np->parent = curproc;
   *np->tf = *curproc->tf;
