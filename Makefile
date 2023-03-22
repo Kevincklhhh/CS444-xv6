@@ -184,7 +184,8 @@ UPROGS=\
 	_hello\
 	_helloYou\
 	_testcase\
-	_numMaxId\
+	_getNumProc\
+	_getMaxPid\
 
 
 fs.img: mkfs README $(UPROGS)
